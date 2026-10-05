@@ -3,6 +3,14 @@
 set -x
 while [[ $# -gt 0 ]]; do
     case $1 in
+        --run_name|--init_model_path|--template|--tp_size)
+            if [[ $# -lt 2 || -z "$2" || "$2" == --* ]]; then
+                echo "Missing value for $1" >&2
+                exit 1
+            fi
+            ;;
+    esac
+    case $1 in
         --run_name)
             RUN_NAME="$2"
             shift 2
